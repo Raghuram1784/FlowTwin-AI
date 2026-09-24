@@ -1,0 +1,8 @@
+{
+  "python.defaultInterpreterPath": "C:\\Python314\\python.exe",
+  "python.analysis.extraPaths": [
+    "c:\\Users\\Raghu Ram\\Desktop\\4-1 Sem\\GWA\\FlowTwin AI\\backend",
+    "C:\\Python314\\Lib\\site-packages"
+  ],
+  "css.lint.unknownAtRules": "ignore"
+}
