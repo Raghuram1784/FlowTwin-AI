@@ -61,10 +61,6 @@ flowchart LR
 - **Edge Weight**: Total observed transition frequency between steps across all recorded sessions.
 - **Session**: An ordered, timestamped sequence of steps and dwell times representing an individual user's journey.
 
-<p align="center">
-  <img src="docs/images/ppt-event-to-digital-twin.png" alt="Events to Digital Twin" width="100%" />
-</p>
-
 ---
 
 ## 🏛️ System Architecture
@@ -174,10 +170,6 @@ NetworkX computes graph metrics dynamically across stored workflow event records
 - **Rework / Cycle Analysis** — Detects loops, backward backtracking, and repeated transitions indicative of friction.
 - **Drop-off Analysis** — Measures step-level attrition relative to inbound visit volume.
 
-<p align="center">
-  <img src="docs/images/ppt-graph-ml-intelligence.png" alt="Graph and ML Intelligence" width="100%" />
-</p>
-
 ---
 
 ## 🤖 Predictive Machine Learning
@@ -235,6 +227,10 @@ Interactive directed canvas powered by `@xyflow/react` and NetworkX.
 - Proportional edge stroke widths representing relative transition volume.
 - Interactive slide-over inspection drawer showing PageRank, betweenness centrality, dwell time, and detailed incoming/outgoing transition rates.
 
+<p align="center">
+  <img src="docs/images/workflow-graph.png" alt="Workflow Digital Twin Graph" width="100%" />
+</p>
+
 ### Bottleneck Intelligence & Rule-Based Recommendations
 Dynamic friction ranking table sorting steps by drop-off rate, dwell time anomalies, and backtracking counts.
 - **Deterministic Actionable Solutions**: Provides rules-based advice based on empirical graph metrics (e.g., auto-parsing recommendation when upload dwell exceeds baseline, or questionnaire simplification when back-loops peak). FlowTwin uses deterministic algorithms for recommendations rather than an external LLM, ensuring zero hallucinations.
@@ -266,28 +262,6 @@ Realistic user interface simulating the end-to-end Job Application workflow:
 - Step-by-step candidate progression: Careers Portal Landing &rarr; Search &rarr; Job Details &rarr; Apply &rarr; Resume Upload (with simulated parsing failures) &rarr; Screening Questions (with hesitation loops) &rarr; Review &rarr; Submit.
 - One-click persona presets: *Ideal Candidate*, *Questions Friction*, *Resume Error*, and *Early Drop-off*.
 
-<details>
-<summary><strong>View Additional Visual Assets</strong></summary>
-
-<br />
-
-#### Working Product Overview
-<p align="center">
-  <img src="docs/images/ppt-working-product.png" alt="FlowTwin Working Product" width="100%" />
-</p>
-
-#### Multi-Workflow Architecture
-<p align="center">
-  <img src="docs/images/ppt-multi-workflow-architecture.png" alt="Multi-Workflow Architecture" width="100%" />
-</p>
-
-#### Presentation Hero Slide
-<p align="center">
-  <img src="docs/images/ppt-hero-slide.png" alt="FlowTwin Hero Slide" width="100%" />
-</p>
-
-</details>
-
 ---
 
 ## 📊 Current Benchmark Results
@@ -313,13 +287,16 @@ The current repository build includes a controlled benchmark dataset representin
 
 FlowTwin AI is a generic analytics engine, not a single-purpose job application tool. Its workflow registry decouples process definitions from data collection and analytics:
 
-```
-Workflow Definition (JSON / Schema)
-          │
-          ├──> Dynamic Graph Topology & Canonical Order
-          ├──> Step Labels & Severity Thresholds
-          ├──> Dynamic Session Trajectory Feature Extraction
-          └──> Domain-Agnostic Bottleneck & Path Mining
+```mermaid
+flowchart TD
+    REG[Workflow Definition Registry\nJSON / Python Schema] --> TOP[Graph Topology & Step Ordering]
+    REG --> LBL[Dynamic Step Labels & Roles]
+    REG --> FEAT[Behavioral Trajectory Feature Extraction]
+    REG --> BOT[Domain-Agnostic Bottleneck & Path Mining]
+    
+    TOP --> WF1[Job Application\nRecruitment & HR]
+    TOP --> WF2[Hospital Appointment\nHealthcare]
+    TOP --> WF3[Fintech Loan Application\nFintech & Banking]
 ```
 
 ### Registered Workflows in Repository
@@ -331,10 +308,6 @@ Workflow Definition (JSON / Schema)
    `Start` &rarr; `Loan Calculator` &rarr; `Applicant Profile` &rarr; `KYC Identity Check` &rarr; `Income Verification` &rarr; `Automated Underwriting` &rarr; `Loan Disbursed`
 
 Switching the active workflow in the UI dropdown immediately recalculates the digital twin graph, bottleneck scores, and prediction models for that domain.
-
-<p align="center">
-  <img src="docs/images/ppt-multi-workflow-architecture.png" alt="Multi-workflow Architecture" width="100%" />
-</p>
 
 ---
 
@@ -528,7 +501,11 @@ FlowTwin-AI/
 │   ├── package.json             # NPM dependencies & scripts
 │   └── vite.config.js           # Vite build configuration
 ├── docs/
-│   └── images/                  # Architecture diagrams, dashboard screenshots, and visual assets
+│   └── images/                  # Dashboard and workflow screenshots
+│       ├── overview-dashboard.png
+│       ├── workflow-graph.png
+│       ├── bottleneck-intelligence.png
+│       └── session-journeys.png
 └── README.md                    # Project documentation
 ```
 
