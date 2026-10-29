@@ -106,55 +106,6 @@ Every user interaction is captured as a discrete event linking a session, the or
 }
 ```
 
-The database maps workflows, sessions, and events via the following schema:
-
-```mermaid
-erDiagram
-    WORKFLOW ||--o{ SESSION : configures
-    SESSION ||--o{ EVENT : generates
-
-    WORKFLOW {
-        string id PK
-        string name
-        string category
-        string start_step
-        string success_step
-        string exit_step
-    }
-
-    SESSION {
-        string id PK
-        string workflow_id FK
-        string user_id
-        datetime start_time
-        datetime end_time
-        string status
-        string current_step
-        float total_duration
-        int step_count
-        int backward_count
-        int repeated_step_count
-        int repeated_transition_count
-        int error_count
-        string predicted_risk
-        float completion_probability
-        float abandonment_probability
-        string journey_path
-    }
-
-    EVENT {
-        int id PK
-        string workflow_id
-        string session_id FK
-        string user_id
-        string from_step
-        string to_step
-        string action
-        datetime timestamp
-        float time_spent
-        string metadata_json
-    }
-```
 
 ---
 
